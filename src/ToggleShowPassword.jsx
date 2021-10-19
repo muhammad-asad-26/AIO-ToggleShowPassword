@@ -3,8 +3,6 @@ import "./ui/ToggleShowPassword.css";
 export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
     const item = `input[type="password"]`;
 
-    waitFor(item, () => handlePasswords());
-
     function handlePasswordToggle() {
         // eslint-disable-next-line consistent-this
         const button = this;
@@ -51,5 +49,7 @@ export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
             }
         });
     }
+
+    waitFor(item, () => handlePasswords());
     return null;
 }
