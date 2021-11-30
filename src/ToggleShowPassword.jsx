@@ -1,4 +1,6 @@
 import "./ui/ToggleShowPassword.css";
+import defaultEyeClosedIcon from "./assets/eye_slash.svg";
+import defaultEyeOpenIcon from "./assets/eye.svg";
 
 export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
     const item = `input[type="password"]`;
@@ -40,9 +42,10 @@ export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
                 parent.insertAdjacentHTML(
                     "beforeend",
                     `<button type="button" class="toggle-password-button show-val" tabindex="-1">
-                        <img src="${eyeOpen.value.uri}" class="icon-hide" />
-                        <img src="${eyeClosed.value.uri}" class="icon-show" />
-                    </button>`);
+                        <img src=${eyeOpen ? eyeOpen.value.uri : defaultEyeOpenIcon} class="icon-hide" />
+                        <img src=${eyeClosed ? eyeClosed.value.uri : defaultEyeClosedIcon} class="icon-show" />
+                    </button>`
+                );
 
                 const toggleBtn = document.querySelector(".toggle-password-button");
                 toggleBtn.addEventListener("click", handlePasswordToggle);
