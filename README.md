@@ -8,7 +8,7 @@ Display a toggle to show/hide password input fields.
 
 Place the widget close to password input field(s).
 
-Display an icon for switching a password input to visible text. Then dislpaying another icon for switching back.
+Display an icon for switching a password input to visible text. Then displaying another icon for switching back.
 
 In many cases this would be images such as eyes open and eyes closed.
 
