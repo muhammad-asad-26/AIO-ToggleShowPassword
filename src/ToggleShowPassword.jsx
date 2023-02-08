@@ -2,14 +2,14 @@ import "./ui/ToggleShowPassword.css";
 import defaultEyeClosedIcon from "./assets/eye_slash.svg";
 import defaultEyeOpenIcon from "./assets/eye.svg";
 
-export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
+export default function ToggleShowPassword({eyeOpen, eyeClosed}) {
     const item = `input[type="password"]`;
 
-    function handlePasswordToggle() {
+    function handlePasswordToggle(event) {
         // eslint-disable-next-line consistent-this
-        const button = this;
-        const inputType = button.previousSibling.getAttribute("type");
+        const button = event.target.parentElement;
         const input = button.previousSibling;
+        const inputType = input.getAttribute("type");
 
         if (inputType === "password") {
             input.setAttribute("type", "text");
@@ -30,27 +30,30 @@ export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
             }
         });
 
-        observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, {childList: true, subtree: true});
     }
 
     function handlePasswords() {
         const passwords = [...document.querySelectorAll(`input[type="password"]`)];
-        passwords.forEach(password => {
+
+        for (const [index, password] of passwords.entries()) {
             const parent = password.parentNode;
-            if (!parent.classList.contains(".toggle-password")) {
-                parent.classList.add("toggle-password");
-                parent.insertAdjacentHTML(
-                    "beforeend",
-                    `<button type="button" class="toggle-password-button show-val" tabindex="-1">
+
+            if (parent.classList.contains("toggle-password")) continue;
+
+            parent.classList.add("toggle-password");
+            parent.insertAdjacentHTML(
+                "beforeend",
+                `<button id="toggle-password-button-${index}" type="button" class="toggle-password-button show-val" tabindex="-1">
                         <img src=${eyeOpen ? eyeOpen.value.uri : defaultEyeOpenIcon} class="icon-hide" />
                         <img src=${eyeClosed ? eyeClosed.value.uri : defaultEyeClosedIcon} class="icon-show" />
                     </button>`
-                );
+            );
 
-                const toggleBtn = document.querySelector(".toggle-password-button");
-                toggleBtn.addEventListener("click", handlePasswordToggle);
-            }
-        });
+            const toggleBtn = document.getElementById(`toggle-password-button-${index}`);
+            toggleBtn.addEventListener("click", handlePasswordToggle);
+        }
+
     }
 
     waitFor(item, () => handlePasswords());
