@@ -2,7 +2,7 @@ import "./ui/ToggleShowPassword.css";
 import defaultEyeClosedIcon from "./assets/eye_slash.svg";
 import defaultEyeOpenIcon from "./assets/eye.svg";
 
-export default function ToggleShowPassword({eyeOpen, eyeClosed}) {
+export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
     const item = `input[type="password"]`;
 
     function handlePasswordToggle(event) {
@@ -30,7 +30,7 @@ export default function ToggleShowPassword({eyeOpen, eyeClosed}) {
             }
         });
 
-        observer.observe(document.body, {childList: true, subtree: true});
+        observer.observe(document.body, { childList: true, subtree: true });
     }
 
     function handlePasswords() {
@@ -53,7 +53,6 @@ export default function ToggleShowPassword({eyeOpen, eyeClosed}) {
             const toggleBtn = document.getElementById(`toggle-password-button-${index}`);
             toggleBtn.addEventListener("click", handlePasswordToggle);
         }
-
     }
 
     waitFor(item, () => handlePasswords());
