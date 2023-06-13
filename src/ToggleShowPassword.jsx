@@ -39,9 +39,16 @@ export default function ToggleShowPassword({eyeOpen, eyeClosed}) {
         for (const [index, password] of passwords.entries()) {
             const parent = password.parentNode;
 
-            if (parent.classList.contains("toggle-password")) continue;
+            const children = parent.children;
+            let isButtonAlreadyPresent;
+            for (let i = 0; i < children.length; i++) {
+                if (children[i].id.startsWith("toggle-password-button")) {
+                    isButtonAlreadyPresent = true
+                }
+            }
 
-            parent.classList.add("toggle-password");
+            if (isButtonAlreadyPresent) continue;
+
             parent.insertAdjacentHTML(
                 "beforeend",
                 `<button id="toggle-password-button-${index}" type="button" class="toggle-password-button show-val" tabindex="-1">
