@@ -1,9 +1,7 @@
-import { Component, createElement } from "react";
+import { createElement } from "react";
 
-export class preview extends Component {
-    render() {
-        return <div></div>;
-    }
+export function preview() {
+    return <div></div>;
 }
 
 export function getPreviewCss() {
