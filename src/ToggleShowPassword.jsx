@@ -36,12 +36,20 @@ export default function ToggleShowPassword({ eyeOpen, eyeClosed }) {
     function handlePasswords() {
         const passwords = [...document.querySelectorAll(`input[type="password"]`)];
 
-        for (const [index, password] of passwords.entries()) {
+        for (const password of passwords) {
             const parent = password.parentNode;
 
-            if (parent.classList.contains("toggle-password")) continue;
+            let isButtonAlreadyPresent;
+            for (const child of parent.children) {
+                if (child.id.startsWith("toggle-password-button")) {
+                    isButtonAlreadyPresent = true;
+                    break;
+                }
+            }
+            if (isButtonAlreadyPresent) continue;
 
-            parent.classList.add("toggle-password");
+            const index = Math.floor(Math.random() * 1000000);
+
             parent.insertAdjacentHTML(
                 "beforeend",
                 `<button id="toggle-password-button-${index}" type="button" class="toggle-password-button show-val" tabindex="-1">
